@@ -144,7 +144,8 @@
             "type": "jaeger",
             "uid": "jaeger"
           },
-          "query": "service.name=\"demo\""
+          "queryType": "search",
+          "service": "demo"
         }
       ],
       "title": "Traces",

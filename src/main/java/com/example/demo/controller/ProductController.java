@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/api/products")
@@ -24,6 +25,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         log.info("Creating new product: {}", product);
+        doNothingButSleepForSomeTime();
         return ResponseEntity.ok(service.createProduct(product));
     }
 
@@ -65,4 +67,16 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    Random random = new Random();
+    private void doNothingButSleepForSomeTime() {
+        try {
+            int sleepTime = random.nextInt(1, 3);
+            log.info("sleeping for " + sleepTime + " seconds");
+            Thread.sleep(sleepTime * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
